@@ -13,6 +13,6 @@ open class FilePreviewApp : FlutterApplication() {
     override fun onCreate() {
         super.onCreate()
         //初始化TBS
-        TbsManager.instance.initTBS(this,null)
+        TbsManager.instance.initTBS(this, null)
     }
 }

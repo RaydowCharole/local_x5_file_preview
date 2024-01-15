@@ -6,11 +6,9 @@ part of 'file_preview.dart';
 /// @Description: 文件预览view
 
 class FilePreviewWidget extends StatefulWidget {
-  final double width;
-  final double height;
   final String path;
   final FilePreviewController? controller;
-  FilePreviewCallBack? callBack;
+  final FilePreviewCallBack? callBack;
 
   /// 文件预览widget
   ///
@@ -22,12 +20,7 @@ class FilePreviewWidget extends StatefulWidget {
   ///
   /// [controller] [FilePreviewController]控制器
   FilePreviewWidget(
-      {Key? key,
-      required this.width,
-      required this.height,
-      required this.path,
-      this.controller,
-      this.callBack})
+      {Key? key, required this.path, this.controller, this.callBack})
       : super(key: key);
 
   @override
@@ -41,39 +34,43 @@ class FilePreviewWidgetState extends State<FilePreviewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      return SizedBox(
-        width: widget.width,
-        height: widget.height,
-        child: AndroidView(
-          viewType: _viewType,
-          creationParams: {
-            "width": widget.width,
-            "height": widget.height,
-            "path": widget.path,
-          },
-          onPlatformViewCreated: _registerChannel,
-          creationParamsCodec: const StandardMessageCodec(),
-        ),
-      );
-    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      return SizedBox(
-        width: widget.width,
-        height: widget.height,
-        child: UiKitView(
-          viewType: _viewType,
-          creationParams: {
-            "width": widget.width,
-            "height": widget.height,
-            "path": widget.path,
-          },
-          onPlatformViewCreated: _registerChannel,
-          creationParamsCodec: const StandardMessageCodec(),
-        ),
-      );
-    } else {
-      return Container();
-    }
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (defaultTargetPlatform == TargetPlatform.android) {
+          return SizedBox(
+            width: constraints.maxWidth,
+            height: constraints.maxHeight,
+            child: AndroidView(
+              viewType: _viewType,
+              creationParams: {
+                "width": constraints.maxWidth,
+                "height": constraints.maxHeight,
+                "path": widget.path,
+              },
+              onPlatformViewCreated: _registerChannel,
+              creationParamsCodec: const StandardMessageCodec(),
+            ),
+          );
+        } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+          return SizedBox(
+            width: constraints.maxWidth,
+            height: constraints.maxHeight,
+            child: UiKitView(
+              viewType: _viewType,
+              creationParams: {
+                "width": constraints.maxWidth,
+                "height": constraints.maxHeight,
+                "path": widget.path,
+              },
+              onPlatformViewCreated: _registerChannel,
+              creationParamsCodec: const StandardMessageCodec(),
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 
   //注册cannel

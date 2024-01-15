@@ -52,12 +52,13 @@ android {
     buildTypes {
         release {
             //关闭删除无用资源
-            shrinkResources false
+//            shrinkResources false
             //关闭删除无用代码
-            minifyEnabled false
-            zipAlignEnabled true
+//            minifyEnabled false
+//            zipAlignEnabled true
             signingConfig signingConfigs.debug
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            consumerProguardFiles 'proguard-rules.pro' // Add this line
         }
     }
 }

@@ -1,4 +1,5 @@
 import 'package:file_preview/file_preview.dart';
+import 'package:file_preview_example/file_paths.dart';
 import 'package:flutter/material.dart';
 
 /// @Author: gstory
@@ -7,33 +8,35 @@ import 'package:flutter/material.dart';
 /// @Description: dart类作用描述
 
 class FilePreviewPage extends StatefulWidget {
-  final String title;
   final String path;
 
-  const FilePreviewPage({Key? key, required this.path, required this.title})
-      : super(key: key);
+  const FilePreviewPage({Key? key, required this.path}) : super(key: key);
 
   @override
   _FilePreviewPageState createState() => _FilePreviewPageState();
 }
 
 class _FilePreviewPageState extends State<FilePreviewPage> {
+  late String fileExtension;
   FilePreviewController controller = FilePreviewController();
+
+  @override
+  void initState() {
+    fileExtension = widget.path.split('.').last;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('$fileExtension 预览'),
       ),
       body: Column(
         children: [
-          Container(
-            alignment: Alignment.topLeft,
+          Expanded(
             child: FilePreviewWidget(
-             controller: controller,
-              width: 400,
-              height: 600,
+              controller: controller,
               path: widget.path,
               callBack: FilePreviewCallBack(onShow: () {
                 print("文件打开成功");
@@ -44,42 +47,30 @@ class _FilePreviewPageState extends State<FilePreviewPage> {
               }),
             ),
           ),
-          Row(
-            children: [
-              TextButton(
-                onPressed: () {
-                  controller.showFile("https://gstory.vercel.app/ceshi/ceshi.docx");
-                },
-                child: Text("docx"),
-              ),
-              TextButton(
-                onPressed: () {
-                  controller.showFile("https://gstory.vercel.app/ceshi/ceshi.pdf");
-                },
-                child: Text("pdf"),
-              ),
-              TextButton(
-                onPressed: () {
-                  controller.showFile("https://gstory.vercel.app/ceshi/ceshi.xisx");
-                },
-                child: Text("xisx"),
-              ),
-              TextButton(
-                onPressed: () {
-                  controller.showFile("https://gstory.vercel.app/ceshi/ceshi.txt");
-                },
-                child: Text("txt"),
-              ),
-              TextButton(
-                onPressed: () {
-                  controller.showFile("https://gstory.vercel.app/ceshi/ceshi.pptx");
-                },
-                child: Text("ppt"),
-              ),
-            ],
+          Container(
+            margin: const EdgeInsets.only(bottom: 32),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              child:
+                  Row(children: files.map((e) => _changeFileBtn(e)).toList()),
+            ),
           )
         ],
       ),
+    );
+  }
+
+  Widget _changeFileBtn(String path) {
+    String fileExtension = path.split('.').last;
+    return TextButton(
+      onPressed: () {
+        controller.showFile(path);
+        setState(() {
+          this.fileExtension = fileExtension;
+        });
+      },
+      child: Text(fileExtension),
     );
   }
 }

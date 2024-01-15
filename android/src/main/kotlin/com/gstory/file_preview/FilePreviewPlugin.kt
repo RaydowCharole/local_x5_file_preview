@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.annotation.NonNull
 import com.gstory.file_preview.utils.FileUtils
+import com.tencent.smtt.export.external.TbsCoreSettings
 import com.tencent.smtt.sdk.QbSdk
+import com.tencent.smtt.sdk.TbsListener
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -26,8 +28,8 @@ class FilePreviewPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         mActivity = binding.activity
         mFlutterPluginBinding?.platformViewRegistry?.registerViewFactory(
-            "com.gstory.file_preview/filePreview",
-            FilePreviewFactory(mFlutterPluginBinding?.binaryMessenger!!, mActivity!!)
+                "com.gstory.file_preview/filePreview",
+                FilePreviewFactory(mFlutterPluginBinding?.binaryMessenger!!, mActivity!!)
         )
 
     }
@@ -70,12 +72,12 @@ class FilePreviewPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         } else if (call.method == "tbsHasInit") {
             result.success(TbsManager.instance.isInit)
         } else if (call.method == "deleteCache") {
-            FileUtils.deleteCache(mActivity!!,FileUtils.getDir(mActivity!!))
+            FileUtils.deleteCache(mActivity!!, FileUtils.getDir(mActivity!!))
             result.success(true)
         } else if (call.method == "tbsVersion") {
             result.success(QbSdk.getTbsSdkVersion().toString())
         } else if (call.method == "tbsDebug") {
-            mActivity?.startActivity(Intent(mActivity!!,X5WebviewActivity().javaClass))
+            mActivity?.startActivity(Intent(mActivity!!, DebugX5Activity().javaClass))
             result.success(true)
         }
     }
