@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_open_doc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="#d2d2d2"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="打开doc文件" />
+
+    <TextView
+        android:id="@+id/tv_open_docx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="#d2d2d2"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="打开docx文件" />
+
+    <TextView
+        android:id="@+id/tv_open_ppt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="#d2d2d2"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="打开ppt文件" />
+
+    <TextView
+        android:id="@+id/tv_open_pptx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="#d2d2d2"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="打开pptx文件" />
+
+    <TextView
+        android:id="@+id/tv_open_xls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="#d2d2d2"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="打开xls文件" />
+
+    <TextView
+        android:id="@+id/tv_open_xlsx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="#d2d2d2"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="打开xlsx文件" />
+
+</LinearLayout>
