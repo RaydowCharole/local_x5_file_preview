@@ -1,0 +1,6 @@
+查询 tbs sdk 历史版本:
+https://x5.tencent.com/docs/version_list.html
+
+tbs sdk jar 下载地址:
+https://tbs.imtt.qq.com/sdk/release/<tbs sdk 版本号>.zip
+例如: https://tbs.imtt.qq.com/sdk/release/44226.zip
